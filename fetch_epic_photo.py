@@ -9,9 +9,9 @@ from save_tools import save_picture
 
 def main():
     load_dotenv()
-    nasa_token = os.environ.get("NASA_API_TOKEN")
+    nasa_token = os.environ.get('NASA_API_TOKEN')
 
-    parser = argparse.ArgumentParser(description='Данный файл скачивает фотографии с последнего запуска')
+    parser = argparse.ArgumentParser(description='Данный файл скачивает фотографии с сервиса NASA Astronomy Picture of the Day (APOD)')
     parser.add_argument('--folder',
                         type=str,
                         default='folder',
@@ -20,7 +20,7 @@ def main():
     args = parser.parse_args()
     folder = args.folder
 
-    payload = {"api_key": nasa_token}
+    payload = {'api_key': nasa_token}
     url = 'https://api.nasa.gov/EPIC/api/natural/images'
     response = requests.get(url, params=payload)
     response.raise_for_status()
