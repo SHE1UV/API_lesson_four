@@ -9,21 +9,20 @@ from dotenv import load_dotenv
 
 def main():
     load_dotenv()
-    tg_token = os.getenv("TG_TOKEN")
-    tg_chat_id = os.getenv("TG_CHAT_ID")
+    tg_token = os.getenv('TG_TOKEN')
+    tg_chat_id = os.getenv('TG_CHAT_ID')
 
     bot = telegram.Bot(token=tg_token)
 
-    parser = argparse.ArgumentParser(description='Данный файл отправляет случайные фотографии')
+    parser = argparse.ArgumentParser(description='Отправка случайных фотографий в чат Telegram')
     parser.add_argument('--time',
                         type=int,
                         default=14400,
-                        help='Введите с какой переодичностью отправлять картинки'
-                        )
+                        help='Интервал времени (в секундах) между отправкой случайных фотографий')
     parser.add_argument('--folder',
                         type=str,
                         default='folder',
-                        help='Введите название папки, содержащей фотографии')
+                        help='Путь к папке, содержащей фотографии для отправки')
     args = parser.parse_args()
     folder = args.folder
     periodicity = args.time
@@ -34,16 +33,16 @@ def main():
             all_files.extend([os.path.join(root, file) for file in files])
 
         if not all_files:
-            print(f"Папка {folder} не содержит файлов.")
+            print(f'Папка {folder} не содержит файлов.')
             break
 
         random_file = random.choice(all_files)
         try:
             with open(random_file, 'rb') as file:
                 bot.send_document(chat_id=tg_chat_id, document=file)
-            print(f"Отправлена фотография: {random_file}")
+            print(f'Отправлена фотография: {random_file}')
         except telegram.error.TelegramError as e:
-            print(f"Произошла ошибка при отправке: {e}")
+            print(f'Произошла ошибка при отправке: {e}')
 
         time.sleep(periodicity)
 
