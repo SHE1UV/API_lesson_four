@@ -9,9 +9,9 @@ from save_tools import save_picture, get_extension
 
 def main():
     load_dotenv()
-    nasa_token = os.getenv("NASA_API_TOKEN")
+    nasa_token = os.getenv('NASA_API_TOKEN')
 
-    parser = argparse.ArgumentParser(description='Данный файл скачивает фотографии с последнего запуска')
+    parser = argparse.ArgumentParser(description='Данный файл скачивает фотографии с сервиса NASA Astronomy Picture of the Day (APOD)')
     parser.add_argument('--count',
                         type=int,
                         default=30,
@@ -25,7 +25,7 @@ def main():
     count = args.count
     folder = args.folder
 
-    payload = {"count": count, "api_key": nasa_token}
+    payload = {'count': count, 'api_key': nasa_token}
     url = 'https://api.nasa.gov/planetary/apod'
     response = requests.get(url, params=payload)
     response.raise_for_status()
