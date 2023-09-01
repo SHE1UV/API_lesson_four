@@ -5,16 +5,16 @@ from save_tools import save_picture
 
 
 def main():
-    parser = argparse.ArgumentParser(description='Данный файл скачивает фотографии с последнего запуска')
+    parser = argparse.ArgumentParser(description='Данный файл скачивает фотографии с сервиса NASA Astronomy Picture of the Day (APOD)')
     parser.add_argument('--id',
                         type=str,
                         default='5eb87d42ffd86e000604b384',
-                        help='Введите id последнего запуска'
+                        help='Введите id запуска SpaceX, для которого хотите скачать фотографии.'
                         )
     parser.add_argument('--folder',
                         type=str,
                         default='folder',
-                        help='Введите название папки')
+                        help=''Укажите название папки, в которую будут сохранены скачанные фотографии.')
 
     args = parser.parse_args()
     launch_id = args.id
