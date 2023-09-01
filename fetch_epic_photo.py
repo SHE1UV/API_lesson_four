@@ -15,7 +15,7 @@ def main():
     parser.add_argument('--folder',
                         type=str,
                         default='folder',
-                        help='Введите название папки')
+                        help='Укажите название папки, в которую будут сохранены скачанные фотографии.')
 
     args = parser.parse_args()
     folder = args.folder
